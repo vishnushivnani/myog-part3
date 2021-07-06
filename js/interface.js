@@ -5,28 +5,45 @@ class Interface{
         this.width = width
         this.height = height
         StartButton = createButton("Start");
-        StartButton.position(displayWidth/2,displayHeight-200)
-      
+        StartButton.position(displayWidth/2,displayHeight-200);
+       StartButton.style("background-image","url(Sprites/Images/CharacterFiles/Attack1/Fire(1).png)")
+       StartButton.style("background-size","20%");
+       StartButton.style("border-radius","280px")
+      // StartButton.style('background','red')
+       StartButton.style("border-color","white");
+       StartButton.style("background-repeat","no-repeat");
+       StartButton.style("background-position","center");
+       StartButton.size(60,60)
 
+        
+     //   StartButton.mousePressed(()=>{
+          //  gameState = PLAY;
+        //})
+      
+  
+      bg = createSprite(this.x,this.y,this.width*3,this.height*2);
+      bg.addImage(SpaceImg);
+      bg.scale = 2.5
+      bg.visible = true
+      
         earth =createSprite(this.x-50,this.y-50,this.width,this.height);
-        earth.addAnimation("RotatingEarth",RotatingEarth_Img);
+        earth.addAnimation("RotatingEarth",Rearth);
         earth.scale = 4
        
         
         robo = createSprite(this.x-100,this.y-50,this.width*1.5,this.height*1.2);
-        robo.addImage(Robo_Img)
+        robo.addImage(RoboImg)
         robo.scale = 1.5;
-       
-       this.bg = loadImage("Sprites/Images/EarthFiles/Space.jpg")
-       
+     
+        gameState = SERVE1;
         
     }
     display(){
 
-      
+        //aestriod  = createSprite(random(100,205),random(10,400),50,50);
         if(frameCount%150===0){
             aestriod  = createSprite(random(100,205),random(10,400),50,50);
-            aestriod.addImage(aestroid_Img);
+            aestriod.addImage(aestroidImage);
             aestriod.velocityX = 5
             aestriod.velocityY = 5
             aestriod.scale = 0.5
@@ -34,44 +51,32 @@ class Interface{
           
         }
         if(frameCount%260 === 0){
-            console.log("Ok")
+          
             aestriod2  = createSprite(random(100,605),random(40,50),50,50);
-            aestriod2.addImage(aestroid_Img);
+            aestriod2.addImage(aestroidImage);
             aestriod2.velocityX = 5
             aestriod2.velocityY = 5
             aestriod2.scale = 0.5
             aestriod2.lifetime = 200
             
-        }  
-         StartButton.mousePressed(() =>{  
-            aestriod.visible = false;
+        }
+       
+        StartButton.mousePressed(() =>{
+           bg.visible = false;
+           aestriod.visible = false;
            aestriod2.visible = false;
-           this.bg.hide();
+          // gameState = "ShowMap"
+           console.log("ok",gameState)
            earth.visible = false;
            robo.visible = false;
-           StartButton.hide();});
+           gameState = SERVE2
+           StartButton.hide();
+          });
    
-           
-            imageMode(CENTER)
-            image(this.bg,this.x,this.y,this.width*3,this.height*2)
-            drawSprites();
-            
-    }
-    hide(){
-        aestriod.visible = false;
-        aestriod2.visible = false;
-        this.bg.hide();
-        earth.visible = false;
-        robo.visible = false;
-        StartButton.hide();
-    }
-    show(){
-        aestriod.visible  = true;
-        aestriod2.visible = true;
-        this.bg.show()
-        earth.visible     = true;
-        robo.visible      = true;
-        StartButton.show();
+          
 
+            drawSprites();
+        
     }
+  
 }
